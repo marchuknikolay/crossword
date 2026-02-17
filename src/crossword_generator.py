@@ -14,7 +14,7 @@ import sys
 import time
 from pathlib import Path
 
-from models import CrosswordError
+from models import ClueEntry, CrosswordError, Grid, NumberedClue
 
 
 def _build_arg_parser() -> argparse.ArgumentParser:
@@ -64,14 +64,46 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(1)
 
 
+def _output_all(
+    grid: Grid,
+    across: list[NumberedClue],
+    down: list[NumberedClue],
+    title: str,
+    output_path: str,
+    unplaced: list[ClueEntry] | None = None,
+) -> None:
+    """Generate all output files in an 'output' folder: PDF, XLSX, puzzle SVG, answer SVG."""
+    from pdf_renderer import render_pdf
+    from xlsx_writer import write_clues_xlsx
+    from svg_renderer import render_puzzle_svg, render_answer_svg
+
+    stem = Path(output_path).stem
+    out_dir = Path(output_path).parent / "output"
+    out_dir.mkdir(exist_ok=True)
+
+    pdf_path = str(out_dir / f"{stem}.pdf")
+    xlsx_path = str(out_dir / f"{stem}_clues.xlsx")
+    puzzle_svg_path = str(out_dir / f"{stem}_puzzle.svg")
+    answer_svg_path = str(out_dir / f"{stem}_answer.svg")
+
+    render_pdf(grid, across, down, title, pdf_path)
+    write_clues_xlsx(across, down, xlsx_path, unplaced=unplaced)
+    render_puzzle_svg(grid, puzzle_svg_path)
+    render_answer_svg(grid, answer_svg_path)
+
+    print(f"Output: {pdf_path}", file=sys.stderr)
+    print(f"Output: {xlsx_path}", file=sys.stderr)
+    print(f"Output: {puzzle_svg_path}", file=sys.stderr)
+    print(f"Output: {answer_svg_path}", file=sys.stderr)
+
+
 def _run_generate_mode(args, seed: int, t0: float) -> None:
     """Generate newspaper-style crossword from built-in word bank."""
     from template_filler import generate_crossword
     from grid_builder import build_grid, build_clue_lists, number_grid
-    from pdf_renderer import render_pdf
 
     grid_size = args.grid_size or 15
-    output_path = args.output or "crossword.pdf"
+    output_path = args.output or args.input or "crossword.pdf"
 
     print(f"Generating {grid_size}x{grid_size} crossword (seed={seed})...",
           file=sys.stderr)
@@ -86,7 +118,7 @@ def _run_generate_mode(args, seed: int, t0: float) -> None:
     number_grid(grid)
     across, down = build_clue_lists(grid, placed)
 
-    render_pdf(grid, across, down, args.title, output_path)
+    _output_all(grid, across, down, args.title, output_path)
 
     elapsed = time.time() - t0
     white_cells = sum(
@@ -104,7 +136,6 @@ def _run_generate_mode(args, seed: int, t0: float) -> None:
         f"time {elapsed:.1f}s",
         file=sys.stderr,
     )
-    print(f"Output: {output_path}", file=sys.stderr)
 
 
 def _run_xlsx_mode(args, seed: int, t0: float) -> None:
@@ -112,7 +143,6 @@ def _run_xlsx_mode(args, seed: int, t0: float) -> None:
     from xlsx_reader import read_clues
     from grid_placer import place_words, compute_grid_size
     from grid_builder import build_grid, build_clue_lists, number_grid
-    from pdf_renderer import render_pdf
 
     input_path = Path(args.input)
     output_path = args.output or str(input_path.with_suffix(".pdf"))
@@ -135,11 +165,14 @@ def _run_xlsx_mode(args, seed: int, t0: float) -> None:
         symmetry=args.symmetry,
     )
 
+    placed_answers = {p.answer for p in placed}
+    unplaced = [c for c in clues if c.answer not in placed_answers]
+
     grid = build_grid(placed, grid_size)
     number_grid(grid)
     across, down = build_clue_lists(grid, placed)
 
-    render_pdf(grid, across, down, args.title, output_path)
+    _output_all(grid, across, down, args.title, output_path, unplaced=unplaced)
 
     elapsed = time.time() - t0
     white_cells = sum(
@@ -157,7 +190,6 @@ def _run_xlsx_mode(args, seed: int, t0: float) -> None:
         f"time {elapsed:.1f}s",
         file=sys.stderr,
     )
-    print(f"Output: {output_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":

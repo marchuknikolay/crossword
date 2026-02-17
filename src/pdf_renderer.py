@@ -42,8 +42,8 @@ class LayoutParams:
     banner_y: float = 0.0
 
     # Fonts
-    clue_font_size: float = 7.5
-    clue_leading: float = 9.0
+    clue_font_size: float = 9.0
+    clue_leading: float = 10.5
     space_after: float = 1.5
     number_font_size: float = 6.0
 
@@ -97,16 +97,16 @@ def _compute_layout(
     # Cell size scaling by grid size
     if grid_size <= 13:
         lp.cell_size = 24.0
-        lp.number_font_size = 6.5
+        lp.number_font_size = 8.5
     elif grid_size <= 15:
         lp.cell_size = 24.0
-        lp.number_font_size = 6.0
+        lp.number_font_size = 8.0
     elif grid_size <= 17:
         lp.cell_size = 21.0
-        lp.number_font_size = 5.5
+        lp.number_font_size = 7.0
     else:
         lp.cell_size = 17.0
-        lp.number_font_size = 5.0
+        lp.number_font_size = 6.0
 
     total_clues = len(across) + len(down)
     if total_clues < 40:
@@ -320,7 +320,7 @@ def _draw_grid(c, grid: Grid, layout: LayoutParams, show_answers: bool) -> None:
                 # Cell number (upper-left)
                 if cell.number is not None:
                     c.setFillColorRGB(0, 0, 0)
-                    c.setFont("Helvetica", layout.number_font_size)
+                    c.setFont("Helvetica-Bold", layout.number_font_size)
                     c.drawString(
                         cx + 1.5,
                         cy + cs - layout.number_font_size - 1,

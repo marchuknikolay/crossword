@@ -95,8 +95,9 @@ class TestGrid:
 
 class TestNumberedClue:
     def test_creation(self):
-        clue = NumberedClue(number=5, clue_text="A clue", direction=Direction.DOWN)
+        clue = NumberedClue(number=5, clue_text="A clue", answer="WORD", direction=Direction.DOWN)
         assert clue.number == 5
+        assert clue.answer == "WORD"
         assert clue.direction == Direction.DOWN
 
 

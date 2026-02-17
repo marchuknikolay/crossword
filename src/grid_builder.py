@@ -54,6 +54,7 @@ def build_clue_lists(
         clue = NumberedClue(
             number=cell.number,
             clue_text=entry.clue_text,
+            answer=entry.answer,
             direction=entry.direction,
         )
         if entry.direction == Direction.ACROSS:

@@ -79,16 +79,16 @@ class TestRenderPdf:
 
 class TestComputeLayout:
     def test_default_15x15(self):
-        across = [NumberedClue(1, "test", Direction.ACROSS)]
-        down = [NumberedClue(2, "test", Direction.DOWN)]
+        across = [NumberedClue(1, "test", "TEST", Direction.ACROSS)]
+        down = [NumberedClue(2, "test", "TEST", Direction.DOWN)]
         layout = _compute_layout(15, across, down, "CROSSWORD")
         assert layout.cell_size == 24.0
         assert layout.grid_size == 15
         assert layout.grid_dim == 360.0
 
     def test_cell_size_scaling(self):
-        across = [NumberedClue(1, "test", Direction.ACROSS)]
-        down = [NumberedClue(2, "test", Direction.DOWN)]
+        across = [NumberedClue(1, "test", "TEST", Direction.ACROSS)]
+        down = [NumberedClue(2, "test", "TEST", Direction.DOWN)]
 
         layout_13 = _compute_layout(13, across, down, "TEST")
         assert layout_13.cell_size == 24.0
@@ -102,8 +102,8 @@ class TestComputeLayout:
 
 class TestAdaptiveFit:
     def test_no_change_when_fits(self):
-        across = [NumberedClue(1, "Short clue", Direction.ACROSS)]
-        down = [NumberedClue(2, "Short clue", Direction.DOWN)]
+        across = [NumberedClue(1, "Short clue", "TEST", Direction.ACROSS)]
+        down = [NumberedClue(2, "Short clue", "TEST", Direction.DOWN)]
         layout = _compute_layout(15, across, down, "TEST")
         original_font = layout.clue_font_size
         layout = _adaptive_fit(across, down, layout)

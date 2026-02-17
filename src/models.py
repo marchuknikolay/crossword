@@ -63,6 +63,7 @@ class NumberedClue:
 
     number: int
     clue_text: str
+    answer: str
     direction: Direction
 
 
