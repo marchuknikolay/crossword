@@ -327,14 +327,14 @@ def _draw_grid(c, grid: Grid, layout: LayoutParams, show_answers: bool) -> None:
                         str(cell.number),
                     )
 
-                # Answer letter (centered)
+                # Answer letter (shifted down-right to avoid number)
                 if show_answers and cell.letter:
                     c.setFillColorRGB(0, 0, 0)
-                    font_size = cs * 0.55
-                    c.setFont("Helvetica-Bold", font_size)
-                    lw = stringWidth(cell.letter, "Helvetica-Bold", font_size)
-                    lx = cx + (cs - lw) / 2
-                    ly = cy + (cs - font_size) / 2 + 1
+                    font_size = cs * 0.45
+                    c.setFont("Helvetica", font_size)
+                    lw = stringWidth(cell.letter, "Helvetica", font_size)
+                    lx = cx + cs * 0.55 - lw / 2
+                    ly = cy + cs * 0.42 - font_size / 2
                     c.drawString(lx, ly, cell.letter)
 
     # Outer border

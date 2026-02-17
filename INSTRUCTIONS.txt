@@ -1,0 +1,238 @@
+
+╔═══════════════════════════════════════════════════════════════╗
+║                  CROSSWORD GENERATOR                          ║
+║              Setup & Usage Instructions                       ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  WHAT THIS PROGRAM DOES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  This program creates crossword puzzles in two ways:
+
+    MODE 1 — From your Excel file
+      You provide words and clues in a .xlsx spreadsheet.
+      The program arranges them into a crossword.
+
+    MODE 2 — Auto-generate
+      The program creates a full newspaper-style crossword
+      using its built-in dictionary of ~3,600 words.
+
+  Output files:
+    • PDF file (printable crossword with clues)
+    • Excel file with organized clue lists
+    • SVG images (puzzle grid and answer key)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 1 — INSTALL PYTHON (one time only)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  If you already have Python installed, skip to Step 2.
+
+  1. Open your web browser.
+
+  2. Go to:  https://www.python.org/downloads/
+
+  3. Click the big yellow button that says "Download Python 3.xx".
+     The file will start downloading.
+
+  4. Find the downloaded file (usually in your Downloads folder)
+     and double-click it to run the installer.
+
+  5. ON THE VERY FIRST SCREEN of the installer, at the bottom,
+     you will see a checkbox that says:
+
+        [ ]  Add Python to PATH
+
+     CHECK THAT BOX!  This is very important.
+     Then click "Install Now".
+
+  6. Wait for installation to finish. Click "Close".
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 2 — RUN THE SETUP SCRIPT (one time only)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. Open the crossword generator folder.
+
+  2. Double-click  setup.bat
+
+  3. A black window will open. Wait for it to say:
+     "Setup completed successfully!"
+
+  4. Press any key to close the window.
+
+  You only need to do this once. If you move the folder to a
+  different computer, run setup.bat again on the new computer.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 3 — GENERATE YOUR CROSSWORD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Double-click  run.bat
+
+  You will see a menu with three choices:
+
+    [1]  Generate from Excel file
+         Use your own words and clues (see "Excel Format" below).
+
+    [2]  Auto-generate from built-in word bank
+         Creates a newspaper-style crossword automatically.
+         No input file needed.
+
+    [3]  Show help & all options
+
+
+  ── Mode 1: From your Excel file ─────────────────────────────
+
+  Option A — Drag and Drop (easiest):
+
+    1. Find your .xlsx file on your computer.
+    2. Drag the file and drop it onto  run.bat
+    3. A black window will open showing progress.
+    4. When it says "Done!", press any key to close.
+
+  Option B — Interactive:
+
+    1. Double-click  run.bat
+    2. Press  1  then Enter.
+    3. Drag your .xlsx file into the black window, then press Enter.
+    4. Wait for it to finish.
+
+
+  ── Mode 2: Auto-generate ────────────────────────────────────
+
+    1. Double-click  run.bat
+    2. Press  2  then Enter.
+    3. The program will create a newspaper-style crossword
+       from its built-in word bank (~3,600 words).
+    4. Wait for it to finish.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 4 — FIND YOUR OUTPUT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  After generation, look for a folder called "output".
+
+  For Mode 1 (Excel), it appears NEXT TO your Excel file.
+  For Mode 2 (auto-generate), it appears inside the program folder.
+
+  Inside you will find:
+
+    yourfile.pdf          — The crossword puzzle (printable!)
+    yourfile_clues.xlsx   — Organized clue list with answers
+    yourfile_puzzle.svg   — Puzzle grid image (no answers)
+    yourfile_answer.svg   — Answer key image
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EXCEL FILE FORMAT (for Mode 1)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Create an Excel file (.xlsx) with 3 columns:
+
+     ┌─────────┬────────────────────────┬──────────┐
+     │ Column A│ Column B               │ Column C │
+     ├─────────┼────────────────────────┼──────────┤
+     │ Number  │ Clue                   │ Answer   │
+     ├─────────┼────────────────────────┼──────────┤
+     │ 1       │ Man's best friend      │ DOG      │
+     │ 2       │ Opposite of night      │ DAY      │
+     │ 3       │ Frozen water           │ ICE      │
+     │ 4       │ Capital of France      │ PARIS    │
+     │ 5       │ Color of the sky       │ BLUE     │
+     │ ...     │ ...                    │ ...      │
+     └─────────┴────────────────────────┴──────────┘
+
+  Rules:
+    • Row 1 and Row 2 are headers — data starts from Row 3.
+    • Answers should be in UPPERCASE, letters only (no spaces,
+      hyphens, or numbers).
+    • Word length: 3 to 15 letters.
+    • Aim for 50–140 words for best results.
+
+  There is an example file included:  input_example.xlsx
+  Open it to see the exact format.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  COMMAND-LINE OPTIONS (advanced)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  For advanced usage, open Command Prompt (press Win+R, type
+  "cmd", press Enter), navigate to the crossword folder, and
+  use these commands:
+
+  EXCEL MODE:
+    run.bat  myfile.xlsx
+    run.bat  myfile.xlsx  --title "HOLIDAY PUZZLE"
+    run.bat  myfile.xlsx  --grid-size 17
+    run.bat  myfile.xlsx  --symmetry
+    run.bat  myfile.xlsx  --title "FUN" --symmetry --grid-size 15
+    run.bat  myfile.xlsx  --seed 42
+
+  GENERATE MODE:
+    run.bat  --generate
+    run.bat  --generate  --title "Daily Puzzle"
+    run.bat  --generate  --seed 42
+    run.bat  --generate  --grid-size 17
+
+  ALL OPTIONS:
+    --title "TEXT"   Set the puzzle title    (default: CROSSWORD)
+    --grid-size N    Force grid to NxN       (default: 15 / auto)
+    --symmetry       180-degree symmetry     (Excel mode only)
+    --retries N      Placement attempts      (default: 30)
+    --seed N         Reproducible result     (same seed = same puzzle)
+    --generate       Use built-in word bank instead of Excel file
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TIPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  • Not all words may fit.  The program will place as many as
+    possible. Unplaced words are listed in the output clue file.
+
+  • More words = better results.  Giving 100-140 words (even if
+    only 60-70 can fit) gives the algorithm more choices and
+    produces denser, better-looking puzzles.
+
+  • Short words are easier to place.  A mix of 3-7 letter words
+    works best.
+
+  • You can re-run the same file multiple times — each run
+    produces a different puzzle layout (unless you use --seed).
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Problem: "Python is not installed" error
+  Fix:     Install Python (see Step 1). Make sure you checked
+           "Add Python to PATH" during installation.
+
+  Problem: "Setup required" when running run.bat
+  Fix:     Double-click setup.bat first (see Step 2).
+
+  Problem: Setup fails with "no internet" error
+  Fix:     Make sure you are connected to the internet.
+           The setup needs to download packages.
+
+  Problem: The black window closes immediately
+  Fix:     Right-click on run.bat, select "Open with" >
+           "Command Prompt" (or just drag your .xlsx onto it).
+
+  Problem: "No module named..." error
+  Fix:     Run setup.bat again.
+
+  Problem: Very few words placed (Excel mode)
+  Fix:     Try adding more words to your Excel file, or use
+           shorter words (3-5 letters). You can also try
+           increasing the grid size:
+           run.bat myfile.xlsx --grid-size 17

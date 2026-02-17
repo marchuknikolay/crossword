@@ -16,7 +16,7 @@ def render_svg(
         cell_size = _default_cell_size(grid.size)
 
     number_font = _number_font_size(grid.size)
-    letter_font = cell_size * 0.55
+    letter_font = cell_size * 0.45
     grid_dim = cell_size * grid.size
 
     parts: list[str] = []
@@ -56,13 +56,13 @@ def render_svg(
                     )
 
                 if show_answers and cell.letter:
-                    cx = x + cell_size / 2
-                    cy = y + cell_size / 2
+                    cx = x + cell_size * 0.55
+                    cy = y + cell_size * 0.58
                     parts.append(
                         f'  <text x="{cx}" y="{cy}" '
                         f'text-anchor="middle" dominant-baseline="central" '
                         f'font-family="Helvetica, Arial, sans-serif" '
-                        f'font-weight="bold" font-size="{letter_font}" '
+                        f'font-size="{letter_font}" '
                         f'fill="black">{cell.letter}</text>\n'
                     )
 
